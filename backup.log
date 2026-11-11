@@ -17,3 +17,9 @@
 2026-11-11 02:36:12,004 - ERROR - FAIL: Error sending email: (552, b'Authentication failed: Error: Account requires phone number verification.')
 2026-11-11 02:44:28,687 - ERROR - FAIL: Backup failed, job7 not in the config file. Ensure command is written correctly and that the job is valid
 2026-11-11 02:44:37,929 - ERROR - FAIL: Error sending email: (552, b'Authentication failed: Error: Account requires phone number verification.')
+2026-11-11 03:05:38,450 - ERROR - FAIL: Backup failed, job9 not in the config file. Ensure command is written correctly and that the job is valid
+2026-11-11 03:05:47,686 - ERROR - FAIL: Error sending email: (552, b'Authentication failed: Error: Account requires phone number verification.')
+2026-11-11 03:14:46,065 - ERROR - FAIL: Backup failed, job7 not in the config file. Ensure command is written correctly and that the job is valid
+2026-11-11 03:14:55,423 - ERROR - FAIL: Error sending email: (552, b'Authentication failed: Error: Account requires phone number verification.')
+2026-11-11 03:24:33,199 - ERROR - FAIL: Backup failed, job7 not in the config file. Ensure command is written correctly and that the job is valid
+2026-11-11 03:24:42,499 - ERROR - FAIL: Error sending email: (552, b'Authentication failed: Error: Account requires phone number verification.')

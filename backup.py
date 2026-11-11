@@ -27,8 +27,9 @@ def clearlog():
         logging.warning(f"{log_file_path} does not exist.")
 
 def CreateBackup(source_path, destination_dir): 
-    # This code is responsible for the functionality of creating the backup using the source path and destination directory
-
+    """
+    This code is responsible for the functionality of creating the backup using the source path and destination directory
+    """
     # used to ensure the source path is correct
     if not os.path.exists(source_path):
         print(f"Error: ",{source_path}," does not exist.")
