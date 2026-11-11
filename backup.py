@@ -38,7 +38,7 @@ def CreateBackup(source_path, destination_dir):
     os.makedirs(destination_dir, exist_ok=True)
     now = datetime.now
     TimeZone = ZoneInfo("Australia/Melbourne")
-    timestamp = now().astimezone(TimeZone).strftime("%Y-%m-%d_%H:%M:%S")
+    timestamp = now().astimezone(TimeZone).strftime("%Y-%m-%d %H:%M:%S")
     base_name = os.path.basename(os.path.normpath(source_path))
     
     # This section of the code is used to identify if the back up is of a file or a file directory
@@ -79,9 +79,17 @@ def main():
         print("Usage: python script.py <filename>")
         sys.exit(1)
     target_file = sys.argv[1]
-    if target_file == "clearlog":
+    if target_file == "clearlog": 
+        #This code handles the ability to clear the log file if the user enters "clearlog" into the command line interface. This is useful for clearing the log file if it becomes too large or if the user wants to start fresh with a new log.
         clearlog()
         sys.exit(0)
+    elif target_file == "backup_files":
+        # This code handles the ability to backup all the files in the backup_files Directory if the user enters the right code. This is useful to quickly backup all the backup files.
+        print("Backing up all files in the backup_files directory.")
+        source_dir = "./backup_files"
+        destination_dir = "./backup_files"
+        CreateBackup(source_dir, destination_dir)
+        sys.exit(0)    
     else:
         print('Searching for: '+ target_file)
         Search_word = target_file
