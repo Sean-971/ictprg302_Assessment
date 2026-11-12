@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-backup.py
-This program is used to backup files and alert the user if any error occurs
-This program was created Sean Hosking, and was created on the 11/11/2026 09:45
-"Sean Hosking" <30029394@students.sunitafe.edu.au>
-version 1.0
+Author: Sean Hosking Seanythelad@gmail.com
+Date: 12/11/2026
+Purpose: Script with functions to backup job files using the command line interface
+version  |  Date    |  Who   |  Comments
+1.0      | 12/11/26 |   SH   |  Created the Program
+1.1      | 12/11/26 |   SH   |  Updated the Header and began debugging
 """
 
 import shutil, os, sys, datetime, logging, smtplib
@@ -13,9 +14,7 @@ from zoneinfo import ZoneInfo
 from backupcfg import smtp, logging
 
 def ClearLog():
-    """
-    Clears the contents of the backup.log file entered like any other job into the command line interface.
-    """
+    """Clears the contents of the backup.log file entered like any other job into the command line interface."""
     log_file_path = 'backup.log'
     if os.path.exists(log_file_path):
         with open(log_file_path, 'w') as log_file:
@@ -27,9 +26,7 @@ def ClearLog():
         logging.warning(f"{log_file_path} does not exist.")
 
 def CreateBackup(source_path, destination_dir): 
-    """
-    This code is responsible for the functionality of creating the backup using the source path and destination directory
-    """
+    """This code is responsible for the functionality of creating the backup using the source path and destination directory"""
     # used to ensure the source path is correct
     if not os.path.exists(source_path):
         print(f"Error: ",{source_path}," does not exist.")
@@ -62,9 +59,7 @@ def CreateBackup(source_path, destination_dir):
         print("Check backup.log for details.")    
 
 def SendEmail(message):
-    """
-    This code is responsible for sending an email to the user if any error occurs during the backup process
-    """
+    """This code is responsible for sending an email to the user if any error occurs during the backup process"""
     try:
         with smtplib.SMTP(smtp["server"], smtp["port"]) as server:
             server.starttls()
