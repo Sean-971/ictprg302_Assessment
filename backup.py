@@ -12,7 +12,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from backupcfg import smtp, logging
 
-def clearlog():
+def ClearLog():
     """
     Clears the contents of the backup.log file entered like any other job into the command line interface.
     """
@@ -34,14 +34,15 @@ def CreateBackup(source_path, destination_dir):
     if not os.path.exists(source_path):
         print(f"Error: ",{source_path}," does not exist.")
         logging.error(f'FAIL: {source_path} located within the Config file but no such file exists.')
+        SendEmail(f'Copy attempt Failed: {source_path} located in the config file but no such file exists.')
         return
     os.makedirs(destination_dir, exist_ok=True)
     now = datetime.now
-    TimeZone = ZoneInfo("Australia/Melbourne")
-    timestamp = now().astimezone(TimeZone).strftime("%Y-%m-%d %H:%M:%S")
+    time_zone = ZoneInfo("Australia/Melbourne")
+    timestamp = now().astimezone(time_zone).strftime("%Y%m%d-%H%M%S")
     base_name = os.path.basename(os.path.normpath(source_path))
     
-    # This section of the code is used to identify if the back up is of a file or a file directory
+    # This section of the code is used to identify if the back up is file directory
     if os.path.isdir(source_path):
         backup_name = f'{base_name}_backup_{timestamp}'
         target_path = os.path.join(destination_dir, backup_name)
@@ -49,6 +50,7 @@ def CreateBackup(source_path, destination_dir):
         shutil.copytree(source_path, target_path)
         print(f"Successfully backed up to: ",{target_path})
         logging.info(f'SUCCESS: backup completed successfully.')
+    #This code is used to identify if the file to back up is a file
     elif os.path.isfile(source_path):
         file_name, file_ext =os.path.splitext(base_name)  
         backup_name = f"{file_name}_{timestamp}{file_ext}"  
@@ -59,9 +61,10 @@ def CreateBackup(source_path, destination_dir):
         logging.info("SUCCESS:  backup completed successfully.")
         print("Check backup.log for details.")    
 
-
 def SendEmail(message):
-    # This code is responsible for sending an email to the user if any error occurs during the backup process
+    """
+    This code is responsible for sending an email to the user if any error occurs during the backup process
+    """
     try:
         with smtplib.SMTP(smtp["server"], smtp["port"]) as server:
             server.starttls()
@@ -75,13 +78,13 @@ def SendEmail(message):
 def main():
     # this code is used to check for the command line argument and check if the file is included within the config file. If it is, it will proceed to backup the file.
     if len(sys.argv) < 2:
-        print("Error: Please provide a filename.")
-        print("Usage: python script.py <filename>")
+        print("Error: Please provide a job name.")
+        print("Usage: python script.py <job name>")
         sys.exit(1)
     target_file = sys.argv[1]
     if target_file == "clearlog": 
         #This code handles the ability to clear the log file if the user enters "clearlog" into the command line interface. This is useful for clearing the log file if it becomes too large or if the user wants to start fresh with a new log.
-        clearlog()
+        ClearLog()
         sys.exit(0)
     elif target_file == "backup_files":
         # This code handles the ability to backup all the files in the backup_files Directory if the user enters the right code. This is useful to quickly backup all the backup files.
@@ -108,4 +111,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
