@@ -1,3 +1,8 @@
 2026-11-11 23:59:25,644 - INFO - Cleared the contents of backup.log.
 2026-11-12 00:33:50,073 - INFO - SUCCESS:  backup completed successfully.
 2026-11-12 00:43:33,634 - INFO - SUCCESS:  backup completed successfully.
+2026-11-12 01:55:29,718 - INFO - SUCCESS:  backup completed successfully.
+2026-11-12 01:58:26,457 - ERROR - FAIL: Backup failed, job7 not in the config file. Ensure command is written correctly and that the job is valid
+2026-11-12 02:03:31,566 - ERROR - FAIL: Backup failed, job4 not in the config file. Ensure command is written correctly and that the job is valid
+2026-11-12 02:05:37,058 - ERROR - FAIL: ./job_files/job4 located within the Config file but no such file exists.
+2026-11-12 02:58:48,933 - ERROR - FAIL: job4 located within the Config file but no such file exists.
