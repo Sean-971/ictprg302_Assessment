@@ -1,2 +1,2 @@
 # ictprg302
-Python programming learning
+Python programming final assessment

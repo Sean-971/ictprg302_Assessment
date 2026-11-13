@@ -15,15 +15,14 @@ from backupcfg import smtp, logging
 
 def clear_log():
     """Clears the contents of the backup.log file entered like any other job into the command line interface."""
-    log_file_path = 'backup.log'
+    log_file_path = 'backup.log' # This set of code is used to tell the logging system where to find the log file, if altering the file's name make sure to update the variable to refelect the new name or else the logging system will fail.  
     if os.path.exists(log_file_path):
         with open(log_file_path, 'w') as log_file:
             log_file.write('')
         print(f"Cleared the contents of {log_file_path}.")
         logging.info("Cleared the contents of backup.log.")
-    else:
-        print(f"{log_file_path} does not exist.")
-        logging.warning(f"{log_file_path} does not exist.")
+    else: # This is a section of code that prevents the entire code from breaking should the log file path be altered or changed without updating the variable too.
+        print(f"{log_file_path} does not exist.")       
 
 def create_backup(source_path, destination_dir): 
     """This code is responsible for the functionality of creating the backup using the source path and destination directory"""
